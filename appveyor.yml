@@ -1,0 +1,14 @@
+version: 1.0.{build}
+image: Visual Studio 2017
+
+environment:
+  DOCKER_USER:
+    secure: eos8P8H5tRDJ1+NeZvL/Jw==
+  DOCKER_PASS:
+    secure: HrheSbZOMC/QwXIdO/iPugTt3PjAPbpKFZrYCRaPSTQ=
+install:
+  - docker version
+
+build_script:
+  - docker login -u="$env:DOCKER_USER" -p="$env:DOCKER_PASS"
+  - .\build.cmd pg11
