@@ -69,7 +69,10 @@ RUN mkdir "C:\\docker-entrypoint-initdb.d"
 COPY --from=prepare /pgsql /pgsql
 
 #### In order to set system PATH, ContainerAdministrator must be used
-USER ContainerAdministrator
+# USER ContainerAdministrator
+RUN net user /add custom-admin
+RUN net localgroup Administrators custom-admin /add
+USER custom-admin
 RUN setx /M PATH "C:\\pgsql\\bin;%PATH%"
 USER ContainerUser
 ENV PGDATA "C:\\pgsql\\data"
